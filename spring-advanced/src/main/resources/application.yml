@@ -1,0 +1,74 @@
+app:
+  language: tr
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+my:
+  app:
+    prop:
+      default-rule:
+        rule-count: 4
+        ruleName: rule1
+        rule_timeout: 10s
+      port: 9090
+      prop1: deneme por1
+      prop2: deneme p2
+      rule-map:
+        osman:
+          rule-count: 3
+          rule-name: osman
+          rule-timeout: 100ms
+        rule1:
+          rule-count: 4
+          rule-name: rule1
+          rule-timeout: 10ms
+      rule-names:
+      - rule1
+      - rule2
+      - rule3
+      rules:
+      - rule-count: 2
+        rule-name: root1
+        rule-timeout: 1s
+      - rule-count: 3
+        rule-name: boot
+        rule-timeout: 4s
+      timeout: 2s
+spring:
+  profiles:
+    active: tr
+    default: eng
+  task:
+    scheduling:
+      pool:
+        size: 2
+another:
+  properties:
+    aprop: osman
+    bprop: xyz
+    another-default-rule:
+      rule-count: 4
+      ruleName: rule1
+      rule_timeout: 10s
+    rule-list:
+      - abc1
+      - abc2
+      - abc3
+    executable-rule-list:
+      - rule-name: sdf1
+        rule-count: 1
+        rule-timeout: 3s
+      - rule-name: ghj
+        rule-count: 4
+        rule-timeout: 190ms
+    monitoring-rule-map:
+      exec1:
+        rule-name: ali
+        rule-count: 3
+        rule-timeout: 1s
+      executable:
+        rule-name: veli
+        rule-count: 2
+        rule-timeout: 1s

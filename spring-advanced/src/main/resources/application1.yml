@@ -1,0 +1,30 @@
+app:
+  language: tr
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+my:
+  app:
+    prop:
+      default-rule:
+        rule-count: 4
+        rule_name: rule1
+        ruleTimeout: 10s
+      port: 9090
+      prop1: deneme por1
+      prop2: deneme p2
+      timeout: 2s
+      rule-names:
+        - rule1
+        - rule2
+        - rule3
+spring:
+  profiles:
+    active: tr
+    default: eng
+  task:
+    scheduling:
+      pool:
+        size: 2
