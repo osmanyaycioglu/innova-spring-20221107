@@ -72,3 +72,8 @@ another:
         rule-name: veli
         rule-count: 2
         rule-timeout: 1s
+server:
+  error:
+    include-message: always
+    include-binding-errors: always
+    include-exception: true
