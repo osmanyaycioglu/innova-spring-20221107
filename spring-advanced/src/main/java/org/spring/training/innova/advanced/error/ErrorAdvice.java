@@ -63,7 +63,8 @@ public class ErrorAdvice {
 
     @ExceptionHandler(Exception.class)
     public ResponseEntity<ErrorObj> handle(Exception exception) {
-        if (exception instanceof NullPointerException){
+        exception.printStackTrace();
+        if (exception instanceof NullPointerException) {
             return ResponseEntity.status(HttpStatus.CONFLICT)
                                  .body(ErrorObj.builder()
                                                .withMicroservice("xyz")

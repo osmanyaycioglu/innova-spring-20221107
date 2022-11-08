@@ -1,9 +1,17 @@
-package org.spring.training.innova.advanced.employee.services;
+package org.spring.training.innova.advanced.employee.services.models;
 
+import org.spring.training.innova.advanced.employee.services.EEmployeeStatus;
+
+import javax.persistence.*;
 import java.time.LocalDate;
 
+@Entity
+//@Table(name = "empolyee_info")
 public class Employee {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long            employeeId;
     private String          name;
     private String          surname;
     private String          username;
@@ -75,5 +83,13 @@ public class Employee {
 
     public void setEmployeeStatus(EEmployeeStatus employeeStatus) {
         this.employeeStatus = employeeStatus;
+    }
+
+    public Long getEmployeeId() {
+        return employeeId;
+    }
+
+    public void setEmployeeId(Long employeeId) {
+        this.employeeId = employeeId;
     }
 }

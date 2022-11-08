@@ -5,12 +5,12 @@ import org.mapstruct.Mapping;
 import org.mapstruct.Mappings;
 import org.mapstruct.factory.Mappers;
 import org.spring.training.innova.advanced.employee.rest.EmployeeRest;
-import org.spring.training.innova.advanced.employee.services.Employee;
+import org.spring.training.innova.advanced.employee.services.models.Employee;
 
-@Mapper
+//@Mapper
 public interface IEmployeeMapper {
 
-    IEmployeeMapper mapper = Mappers.getMapper(IEmployeeMapper.class);
+    IEmployeeMapper mapper = new IEmployeeMapperImpl();
 
     @Mappings({@Mapping(source = "password",target = "activation")})
     Employee toEmployee(EmployeeRest emp);
