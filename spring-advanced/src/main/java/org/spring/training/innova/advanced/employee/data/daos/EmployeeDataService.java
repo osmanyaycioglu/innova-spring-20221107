@@ -29,6 +29,6 @@ public class EmployeeDataService {
     }
 
     public List<Employee> getBySurname(String surname) {
-        return null;
+        return employeeDao.findBySurname(surname);
     }
 }

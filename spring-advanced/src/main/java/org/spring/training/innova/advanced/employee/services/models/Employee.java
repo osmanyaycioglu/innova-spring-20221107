@@ -1,6 +1,8 @@
 package org.spring.training.innova.advanced.employee.services.models;
 
 import org.spring.training.innova.advanced.employee.services.EEmployeeStatus;
+import org.spring.training.innova.advanced.jpa.PasswordConverter;
+import org.spring.training.innova.advanced.security.JasyptSec;
 
 import javax.persistence.*;
 import java.time.LocalDate;
@@ -10,24 +12,41 @@ import java.util.Set;
 @Entity
 //@Table(name = "empolyee_info")
 public class Employee {
-
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long            employeeId;
     private String          name;
     private String          surname;
     // @Column(name = "soy")
+    @Convert(converter = PasswordConverter.class)
     private String          username;
+    @Convert(converter = PasswordConverter.class)
     private String          activation;
     private Integer         height;
     private Integer         weight;
     private LocalDate       birthday;
     @Enumerated(EnumType.STRING)
     private EEmployeeStatus employeeStatus = EEmployeeStatus.ACTIVE;
-    @OneToOne(fetch = FetchType.EAGER,cascade = CascadeType.ALL)
+    @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private Address         address;
-    @OneToMany(fetch = FetchType.EAGER,cascade = CascadeType.ALL)
-    private Set<Phone> phones;
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    private Set<Phone>      phones;
+
+//    @PreUpdate
+//    @PrePersist
+    public void beforeInsertUpdate() {
+        username = JasyptSec.defaultEnc.encrypt(username);
+        activation = JasyptSec.defaultEnc.encrypt(activation);
+    }
+
+//    @PostUpdate
+//    @PostPersist
+//    @PostLoad
+    public void afterInsertUpdate() {
+        username = JasyptSec.defaultEnc.decrypt(username);
+        activation = JasyptSec.defaultEnc.decrypt(activation);
+    }
+
 
     public String getName() {
         return this.name;

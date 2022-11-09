@@ -41,9 +41,9 @@ spring:
     active: tr
     default: eng
   datasource:
-    url: ENC(0h70jMTlRc+iQp/MkCnhYEfRI27f3V6wRpwbyL4CHpzYIF+wmZoPdO6wx2I7azNnC8+ThWkGzjl534Firm217g==)
-    username: ENC(EgupfhRjxhATxx0MdcHqahG3uyEgk49x1WU6Bnum9WfGby3otuJi8DlsNTR8xrhq)
-    password: ENC(a+/sH/SqDVU5MTVr0tm7EgPys4NBuOcHuy9sA/r2BYpAyXikuFWDNu3NWnYFmPij)
+    url: jdbc:h2:file:./data/demo
+    username: sa
+    password: password
     driver-class-name: org.h2.Driver
   jpa:
     database-platform: org.hibernate.dialect.H2Dialect
@@ -60,10 +60,6 @@ spring:
     scheduling:
       pool:
         size: 2
-  security:
-    user:
-      name: osman
-      password: 123456
 another:
   properties:
     aprop: osman
@@ -97,3 +93,4 @@ server:
     include-message: always
     include-binding-errors: always
     include-exception: true
+

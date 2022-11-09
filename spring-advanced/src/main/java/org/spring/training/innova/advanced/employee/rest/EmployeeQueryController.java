@@ -20,20 +20,19 @@ public class EmployeeQueryController {
     private EmployeeQueryService eqs;
 
     @GetMapping("/get/one")
-    public Employee getOne(@RequestParam("empId") Long empId) {
-        return eqs.getOne(empId);
+    public EmployeeRest getOne(@RequestParam("empId") Long empId) {
+        return IEmployeeMapper.mapper.toEmployeeRest(eqs.getOne(empId));
     }
 
     @GetMapping("/get/all")
-    public List<Employee> getAll() {
-        return eqs.getAll();
+    public List<EmployeeRest> getAll() {
+        return IEmployeeMapper.mapper.toEmployeeRests(eqs.getAll());
     }
 
     @GetMapping("/get/by/surname")
-    public List<Employee> getBySurname(@RequestParam("sur")  String surname) {
-        return eqs.getBySurname(surname);
+    public List<EmployeeRest> getBySurname(@RequestParam("sur") String surname) {
+        return IEmployeeMapper.mapper.toEmployeeRests(eqs.getBySurname(surname));
     }
-
 
 
 }

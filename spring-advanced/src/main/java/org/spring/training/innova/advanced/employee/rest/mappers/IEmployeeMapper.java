@@ -11,6 +11,7 @@ import org.spring.training.innova.advanced.employee.services.models.Address;
 import org.spring.training.innova.advanced.employee.services.models.Employee;
 import org.spring.training.innova.advanced.employee.services.models.Phone;
 
+import java.util.List;
 import java.util.Set;
 
 @Mapper
@@ -21,8 +22,11 @@ public interface IEmployeeMapper {
     @Mappings({@Mapping(source = "password",target = "activation")})
     Employee toEmployee(EmployeeRest emp);
 
-    @Mappings({@Mapping(source = "activation",target = "password")})
     EmployeeRest toEmployeeRest(Employee emp);
+
+    List<Employee> toEmployees(List<EmployeeRest> emp);
+
+    List<EmployeeRest> toEmployeeRests(List<Employee> emp);
 
     Address toAddress(AddressRest add);
 
