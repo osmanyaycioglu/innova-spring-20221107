@@ -1,26 +1,36 @@
-package org.spring.training.innova.advanced.employee.rest;
+package org.spring.training.innova.advanced.employee.rest.models;
 
 import org.spring.training.innova.advanced.validation.ContainsStr;
 
+import javax.validation.Valid;
 import javax.validation.constraints.*;
 import java.time.LocalDate;
+import java.util.Set;
 
-@ContainsStr({"1234","123","12345"})
+@ContainsStr({"1234",
+              "123",
+              "12345"
+})
 public class EmployeeRest {
 
     @NotEmpty(message = "name null olamaz")
     @NotNull
     @NotBlank
     @Size(min = 2, max = 20)
-    @ContainsStr({"ali","veli"})
+    @ContainsStr({"ali",
+                  "veli"
+    })
     private String    name;
     @NotEmpty
-    @Size(min = 3,max = 25)
+    @Size(min = 3, max = 25)
     private String    surname;
     @NotEmpty
-    @Size(min = 6,max = 25)
+    @Size(min = 6, max = 25)
     private String    username;
-    @ContainsStr({"asd","qwerty","abc"})
+    @ContainsStr({"asd",
+                  "qwerty",
+                  "abc"
+    })
     @NotEmpty
     @Pattern(regexp = "^(?=.*[A-Za-z])(?=.*\\d)[A-Za-z\\d]{8,}$")
     private String    password;
@@ -32,10 +42,13 @@ public class EmployeeRest {
     private Integer   weight;
     @Past
     private LocalDate birthday;
+    @Valid
+    @NotNull
+    private AddressRest address;
 
-    public @NotEmpty(message = "name null olamaz") @NotNull @NotBlank @Size(min = 2, max = 20) @ContainsStr({"ali",
-                                                                                                             "veli"
-    }) String getName() {
+    private Set<PhoneRest> phones;
+
+    public String getName() {
         return this.name;
     }
 
@@ -97,5 +110,21 @@ public class EmployeeRest {
 
     public void setBirthday(@Past LocalDate birthday) {
         this.birthday = birthday;
+    }
+
+    public AddressRest getAddress() {
+        return address;
+    }
+
+    public void setAddress(AddressRest address) {
+        this.address = address;
+    }
+
+    public Set<PhoneRest> getPhones() {
+        return phones;
+    }
+
+    public void setPhones(Set<PhoneRest> phones) {
+        this.phones = phones;
     }
 }

@@ -1,6 +1,6 @@
 package org.spring.training.innova.advanced.validation;
 
-import org.spring.training.innova.advanced.employee.rest.EmployeeRest;
+import org.spring.training.innova.advanced.employee.rest.models.EmployeeRest;
 
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;

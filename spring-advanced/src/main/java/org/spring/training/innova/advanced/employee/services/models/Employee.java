@@ -4,6 +4,8 @@ import org.spring.training.innova.advanced.employee.services.EEmployeeStatus;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.List;
+import java.util.Set;
 
 @Entity
 //@Table(name = "empolyee_info")
@@ -14,12 +16,18 @@ public class Employee {
     private Long            employeeId;
     private String          name;
     private String          surname;
+    // @Column(name = "soy")
     private String          username;
     private String          activation;
     private Integer         height;
     private Integer         weight;
     private LocalDate       birthday;
-    private EEmployeeStatus employeeStatus;
+    @Enumerated(EnumType.STRING)
+    private EEmployeeStatus employeeStatus = EEmployeeStatus.ACTIVE;
+    @OneToOne(fetch = FetchType.EAGER,cascade = CascadeType.ALL)
+    private Address         address;
+    @OneToMany(fetch = FetchType.EAGER,cascade = CascadeType.ALL)
+    private Set<Phone> phones;
 
     public String getName() {
         return this.name;
@@ -91,5 +99,21 @@ public class Employee {
 
     public void setEmployeeId(Long employeeId) {
         this.employeeId = employeeId;
+    }
+
+    public Address getAddress() {
+        return address;
+    }
+
+    public void setAddress(Address address) {
+        this.address = address;
+    }
+
+    public Set<Phone> getPhones() {
+        return phones;
+    }
+
+    public void setPhones(Set<Phone> phones) {
+        this.phones = phones;
     }
 }
