@@ -22,5 +22,24 @@ public class StartMeUp implements CommandLineRunner {
             userDao.save(myUser);
             System.out.println("Mahmut yazıldı **********");
         }
+        MyUser user1 = userDao.findByUsername("user1");
+        if (user1 == null){
+            MyUser myUser = new MyUser();
+            myUser.setUserRole(EUserRole.USER);
+            myUser.setUsername("user1");
+            myUser.setSecretText("123456");
+            userDao.save(myUser);
+            System.out.println("user1 yazıldı **********");
+        }
+        MyUser super1 = userDao.findByUsername("super1");
+        if (super1 == null){
+            MyUser myUser = new MyUser();
+            myUser.setUserRole(EUserRole.SUPER_ADMIN);
+            myUser.setUsername("super1");
+            myUser.setSecretText("123456");
+            userDao.save(myUser);
+            System.out.println("super1 yazıldı **********");
+        }
+
     }
 }

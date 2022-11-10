@@ -7,12 +7,14 @@ import org.springframework.boot.context.properties.EnableConfigurationProperties
 import org.springframework.boot.web.servlet.ServletComponentScan;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.scheduling.annotation.Scheduled;
+import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 
 @SpringBootApplication
 @EnableConfigurationProperties
 @EnableScheduling
 @EnableEncryptableProperties
 @ServletComponentScan
+@EnableGlobalMethodSecurity(prePostEnabled = true)
 public class SpringAdvancedApplication {
     private int counter = 0;
 

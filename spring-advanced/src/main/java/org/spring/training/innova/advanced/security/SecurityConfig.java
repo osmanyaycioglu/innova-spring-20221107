@@ -7,8 +7,10 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.stereotype.Component;
 
 @Configuration
@@ -28,13 +30,27 @@ public class SecurityConfig {
     }
 
     @Bean
+    public JwtRequestFilter jwtRequestFilter() {
+        return new JwtRequestFilter();
+    }
+
+    @Bean
     public SecurityFilterChain myLocalSecurity(HttpSecurity httpSecurity) throws Exception {
         return httpSecurity
                 .authorizeRequests()
-                .antMatchers("/actuator/**","/h2-console/**")
+                .antMatchers("/actuator/**",
+                             "/h2-console/**",
+                             "/test/**",
+                             "/security/**")
                 .anonymous()
                 .antMatchers("/api/**")
-                .authenticated()
+                .hasAnyRole("ADMIN",
+                            "USER",
+                            "SUPER_ADMIN")
+                .antMatchers("/int/**")
+                .hasAnyRole("ADMIN",
+                         "USER",
+                         "SUPER_ADMIN")
                 .and()
                 .httpBasic()
                 .and()
@@ -42,6 +58,11 @@ public class SecurityConfig {
                 .disable()
                 .cors()
                 .disable()
+                .addFilterBefore(jwtRequestFilter(),
+                                 UsernamePasswordAuthenticationFilter.class)
+                .sessionManagement()
+                .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+                .and()
                 .build();
 
     }

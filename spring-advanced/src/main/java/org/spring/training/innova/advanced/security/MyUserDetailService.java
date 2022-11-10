@@ -7,7 +7,6 @@ import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Component;
 
@@ -29,6 +28,19 @@ public class MyUserDetailService implements UserDetailsService {
         return User.builder()
                    .username(username)
                    .password(encoder.encode(byUsername.getSecretText()))
+                   .roles(byUsername.getUserRole()
+                                    .toString())
+                   .build();
+    }
+
+    public UserDetails loadUserByUsernameWithoutEncode(String username) throws UsernameNotFoundException {
+        MyUser byUsername = userDao.findByUsername(username);
+        if (byUsername == null) {
+            throw new UsernameNotFoundException("böyle user yok");
+        }
+        return User.builder()
+                   .username(username)
+                   .password(byUsername.getSecretText())
                    .roles(byUsername.getUserRole()
                                     .toString())
                    .build();

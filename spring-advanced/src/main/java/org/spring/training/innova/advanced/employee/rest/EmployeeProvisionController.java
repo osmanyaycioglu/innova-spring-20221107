@@ -1,6 +1,7 @@
 package org.spring.training.innova.advanced.employee.rest;
 
 import io.swagger.v3.oas.annotations.Operation;
+import org.spring.training.innova.advanced.aop.DeltaTime;
 import org.spring.training.innova.advanced.employee.rest.mappers.IEmployeeMapper;
 import org.spring.training.innova.advanced.employee.rest.models.EmployeeRest;
 import org.spring.training.innova.advanced.employee.services.EmployeeProvisionService;
@@ -16,6 +17,7 @@ public class EmployeeProvisionController {
     @Autowired
     private EmployeeProvisionService eps;
 
+    @DeltaTime
     @PostMapping("/add")
     @Operation(summary = "çalışan ekleme",description = "uzun zun yazıyorum deneme")
     public String add(@Valid @RequestBody EmployeeRest employeeRest){

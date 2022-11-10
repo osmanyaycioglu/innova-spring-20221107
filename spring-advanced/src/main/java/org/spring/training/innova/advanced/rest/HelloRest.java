@@ -1,8 +1,10 @@
 package org.spring.training.innova.advanced.rest;
 
+import org.spring.training.innova.advanced.aop.CheckRole;
 import org.spring.training.innova.advanced.hello.IHello;
 import org.spring.training.innova.advanced.properties.AnotherAppProperties;
 import org.spring.training.innova.advanced.properties.AppProperties;
+import org.spring.training.innova.advanced.security.models.EUserRole;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
@@ -10,7 +12,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/hello")
+@RequestMapping("/int/hello")
 public class HelloRest {
 
     @Autowired
@@ -40,6 +42,7 @@ public class HelloRest {
                            surname);
     }
 
+    @CheckRole(EUserRole.ADMIN)
     @GetMapping("/props")
     public AppProperties getProps(){
         return appProperties;
